@@ -14,6 +14,18 @@ It contains a series of other popular computer vision datasets, namely MNIST, QM
 They are two-layer fully connected MLP, LeNet , AlexNet, VGG, Inception-v3, ResNet, WideResNet and MobileNet-v3.
 
 ### Example
+#### New Baseline Example
+EarlyCroP, a baseline that replicates GraNd with Hessian-gradient product instead of gradient to score the importance of data instances.
+```sh
+python -u main.py --fraction 0.1 --dataset MNIST --data_path datasets/ --num_exp 1 --epochs 100 --workers 10 --optimizer SGD -se 1 --selection EarlyCroP --model LeNet --lr 0.1 -sp ./result --batch 128
+```
+
+EarlyCroPMask, a baseline that directly scores data instances using learnable masks
+
+```sh
+python -u main.py --fraction 0.1 --dataset MNIST --data_path datasets/ --num_exp 1 --epochs 100 --workers 10 --optimizer SGD -se 1 --selection EarlyCroPMask --model LeNet --lr 0.1 -sp ./result --batch 128
+```
+#### Old Baseline
 Selecting with Glister and training on the coreset with fraction 0.1.
 ```sh
 CUDA_VISIBLE_DEVICES=0 python -u main.py --fraction 0.1 --dataset CIFAR10 --data_path ~/datasets --num_exp 5 --workers 10 --optimizer SGD -se 10 --selection Glister --model InceptionV3 --lr 0.1 -sp ./result --batch 128
